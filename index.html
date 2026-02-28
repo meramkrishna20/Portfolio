@@ -60,10 +60,94 @@
       z-index: 1;
       pointer-events: auto;
     }
+
+    /* ── Mobile / small screen gate ─────────────────────────── */
+    #mobile-gate {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #050905;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding: 32px 24px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+    }
+
+    @media (max-width: 900px) {
+      #mobile-gate {
+        display: flex;
+      }
+    }
+
+    #mobile-gate .mg-icon {
+      font-size: 64px;
+      line-height: 1;
+      filter: drop-shadow(0 0 18px #1db95488);
+    }
+
+    #mobile-gate h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+
+    #mobile-gate p {
+      font-size: 0.88rem;
+      color: #888;
+      max-width: 300px;
+      line-height: 1.6;
+    }
+
+    #mobile-gate .mg-badge {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #mobile-gate .mg-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      color: #aaa;
+    }
+
+    #mobile-gate .mg-chip.active {
+      border-color: #1db954;
+      color: #1db954;
+    }
+
+    #mobile-gate .mg-name {
+      font-size: 0.75rem;
+      color: #444;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Mobile / small-screen gate (hidden on desktop via CSS) -->
+  <div id="mobile-gate">
+    <div class="mg-icon">🖥️</div>
+    <h1>Bhisan's Portfolio</h1>
+    <p>This experience is built for desktop.<br>Please open it on a laptop or PC for the full 3D portfolio.</p>
+    <div class="mg-badge">
+      <span class="mg-chip active">✓ Desktop</span>
+      <span class="mg-chip">Tablet</span>
+      <span class="mg-chip">Mobile</span>
+    </div>
+    <span class="mg-name">bhisangaire.online</span>
+  </div>
+
   <!-- 3D Experience Canvas Container -->
   <canvas id="webgl"></canvas>
 

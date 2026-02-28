@@ -17,7 +17,7 @@ const pePrompt = document.getElementById('pe-prompt')!
 
 // ----- INTRO AUDIO -----
 // space.mp3 — ambient during entire intro, stops on enter
-const spaceAudio = new Audio('/desktop/media/space.mp3')
+const spaceAudio = new Audio('/desktop/media/space.MP3')
 spaceAudio.loop = true
 spaceAudio.volume = 0.6
 
@@ -31,7 +31,7 @@ const enterAudio = new Audio('/desktop/media/enter.MP3')
 enterAudio.volume = 0.9
 
 // room.mp3 — ambient loop after enter
-const roomAudio = new Audio('/desktop/media/room.mp3')
+const roomAudio = new Audio('/desktop/media/room.MP3')
 roomAudio.loop = true
 roomAudio.volume = 0.45
 

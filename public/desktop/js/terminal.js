@@ -16,16 +16,24 @@ const TerminalApp = {
     bootComplete: false,
 
     // ── SFX ──────────────────────────────────────────────────────────────────
+    // Lazy-loaded: no network request until first play (avoids 404 noise if files are absent)
     sfx: {
-        glitch: new Audio('/desktop/media/sfx_glitch.mp3'),
-        keyclick: new Audio('/desktop/media/sfx_keyclick.mp3'),
-        boot: new Audio('/desktop/media/sfx_boot.mp3'),
+        glitch: null,
+        keyclick: null,
+        boot: null,
+    },
+    sfxSrc: {
+        glitch: '/desktop/media/sfx_glitch.mp3',
+        keyclick: '/desktop/media/sfx_keyclick.mp3',
+        boot: '/desktop/media/sfx_boot.mp3',
     },
 
     playSound(name, volume = 0.6) {
+        if (!this.sfx[name]) {
+            this.sfx[name] = new Audio(this.sfxSrc[name])
+        }
         const snd = this.sfx[name]
         if (!snd) return
-        // Clone so it can overlap
         const clone = /** @type {HTMLAudioElement} */ (snd.cloneNode())
         clone.volume = volume
         clone.play().catch(() => { })
