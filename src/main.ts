@@ -52,12 +52,14 @@ function fadeOut(audio: HTMLAudioElement, cb?: () => void) {
   step()
 }
 
-// Try autoplay for both; fall back to mousemove (fires before dismiss click)
+// Try autoplay immediately; fall back to first Chrome-valid activation gesture
 const tryAutoplay = (audio: HTMLAudioElement) => {
   audio.play()
     .catch(() => {
       const start = () => audio.play().catch(() => { })
-      document.addEventListener('mousemove', start, { once: true })
+      // Chrome activation gestures (pointermove does NOT count)
+      document.addEventListener('pointerdown', start, { once: true })
+      document.addEventListener('touchstart', start, { once: true, passive: true })
       document.addEventListener('keydown', start, { once: true })
     })
 }
@@ -75,11 +77,19 @@ function appendInstant(text: string, cls = '') {
 
 function sleep(ms: number) { return new Promise<void>(r => setTimeout(r, ms)) }
 
+// Beep sound for each typed line in the boot sequence
+const beepAudio = new Audio('/desktop/media/beep beep.MP3')
+beepAudio.volume = 0.25
+
 async function printLine(text: string, cls = '', speedMs = 16) {
   const line = document.createElement('div')
   line.className = `t-line ${cls}`
   bootLines.appendChild(line)
   bootLines.scrollTop = bootLines.scrollHeight
+  // Play a brief beep at the start of each line being typed
+  const beep = beepAudio.cloneNode() as HTMLAudioElement
+  beep.volume = 0.25
+  beep.play().catch(() => { })
   for (let i = 0; i <= text.length; i++) {
     line.innerHTML = text.slice(0, i) + '<span class="caret">█</span>'
     await sleep(speedMs)
@@ -198,11 +208,19 @@ function setupDismiss() {
   const dismiss = (e?: KeyboardEvent) => {
     if (e && e.key !== 'Enter') return
 
-    // Stop space.mp3, play enter.mp3, then start room.mp3
+    // Ensure space.mp3 is playing (in case Enter = first interaction)
+    spaceAudio.play().catch(() => { })
+    // Stop main_loop immediately — don't let it bleed into the room phase
+    loopAudio.pause()
+    loopAudio.currentTime = 0
+    // Play enter SFX
     enterAudio.play().catch(() => { })
-    fadeOut(spaceAudio, () => {
-      roomAudio.play().catch(() => { })
-    })
+    // After a short gap, cross-fade space → room
+    setTimeout(() => {
+      fadeOut(spaceAudio, () => {
+        roomAudio.play().catch(() => { })
+      })
+    }, 400)
 
     pressEnterUi.style.opacity = '0'
     pressEnterUi.style.pointerEvents = 'none'
