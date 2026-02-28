@@ -23,23 +23,28 @@ export default class Renderer {
     }
 
     setInstance() {
+        const isMobile = window.innerWidth <= 1280 && 'ontouchstart' in window
+
         this.instance = new THREE.WebGLRenderer({
             canvas: this.canvas,
-            antialias: true,
+            antialias: !isMobile,             // Expensive on mobile GPUs — skip it
             alpha: true,                      // Needed for CSS3D hole-punch transparency
-            logarithmicDepthBuffer: true      // Fixes z-fighting / model glitter
+            logarithmicDepthBuffer: true,     // Prevents z-fighting on monitor edges
+            stencil: false,                   // Not needed; disabling avoids framebuffer feedback loop
         })
         this.instance.outputColorSpace = THREE.SRGBColorSpace
         this.instance.toneMapping = THREE.CineonToneMapping
         this.instance.toneMappingExposure = 1.75
-        this.instance.shadowMap.enabled = true
-        this.instance.shadowMap.type = THREE.PCFSoftShadowMap
+        // Shadows are baked into textures — no need for real-time shadow maps
+        this.instance.shadowMap.enabled = false
 
         // CLEAR TRANSPARENT: This allows the CSS3D layer behind WebGL to show through
         this.instance.setClearColor(0x000000, 0)
 
         this.instance.setSize(this.sizes.width, this.sizes.height)
-        this.instance.setPixelRatio(this.sizes.pixelRatio)
+        // Cap pixel ratio: mobile gets max 1.5 (not 3+), desktop gets max 2
+        const maxDPR = isMobile ? 1.5 : 2
+        this.instance.setPixelRatio(Math.min(window.devicePixelRatio, maxDPR))
     }
 
     setCSSInstance() {

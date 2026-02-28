@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=1280, initial-scale=1.0, user-scalable=yes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Bhisan — 3D Portfolio</title>
   <!-- Critical CSS: prevents white flash before stylesheet loads -->
   <style>
@@ -61,8 +61,8 @@
       pointer-events: auto;
     }
 
-    /* ── Mobile / small screen gate ─────────────────────────── */
-    #mobile-gate {
+    /* ── Portrait mobile: ask user to rotate ─────────────────── */
+    #rotate-gate {
       display: none;
       position: fixed;
       inset: 0;
@@ -71,69 +71,56 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 28px;
-      padding: 32px 24px;
-      text-align: center;
+      gap: 20px;
       font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 32px;
     }
 
-    @media (max-width: 900px) {
-      #mobile-gate {
+    @media (max-width: 900px) and (orientation: portrait) {
+      #rotate-gate {
         display: flex;
       }
     }
 
-    #mobile-gate .mg-icon {
-      font-size: 64px;
-      line-height: 1;
-      filter: drop-shadow(0 0 18px #1db95488);
+    #rotate-gate .rg-icon {
+      font-size: 56px;
+      animation: rg-spin 1.8s ease-in-out infinite alternate;
     }
 
-    #mobile-gate h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
+    @keyframes rg-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(90deg);
+      }
+    }
+
+    #rotate-gate h2 {
       color: #fff;
-      letter-spacing: 0.04em;
+      font-size: 1.3rem;
+      margin: 0;
     }
 
-    #mobile-gate p {
-      font-size: 0.88rem;
-      color: #888;
-      max-width: 300px;
+    #rotate-gate p {
+      color: #666;
+      font-size: 0.85rem;
+      max-width: 260px;
       line-height: 1.6;
-    }
-
-    #mobile-gate .mg-badge {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    #mobile-gate .mg-chip {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 999px;
-      padding: 5px 14px;
-      font-size: 0.78rem;
-      color: #aaa;
-    }
-
-    #mobile-gate .mg-chip.active {
-      border-color: #1db954;
-      color: #1db954;
-    }
-
-    #mobile-gate .mg-name {
-      font-size: 0.75rem;
-      color: #444;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
     }
   </style>
 </head>
 
 <body>
+
+  <!-- Portrait-mode gate: shown only on mobile in portrait orientation -->
+  <div id="rotate-gate">
+    <div class="rg-icon">📱</div>
+    <h2>Rotate Your Device</h2>
+    <p>This 3D portfolio is best experienced in <strong style="color:#1db954">landscape</strong> mode.</p>
+  </div>
 
   <!-- 3D Experience Canvas Container -->
   <canvas id="webgl"></canvas>

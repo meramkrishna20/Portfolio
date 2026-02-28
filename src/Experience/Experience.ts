@@ -6,7 +6,6 @@ import Renderer from './Renderer'
 import World from './World'
 import Resources from './Utils/Resources'
 import sources from './sources'
-import GUI from 'lil-gui'
 
 export default class Experience {
     static instance: Experience
@@ -18,7 +17,6 @@ export default class Experience {
     renderer!: Renderer
     world!: World
     resources!: Resources
-    debug!: GUI
 
     constructor(canvas?: HTMLCanvasElement) {
         if (Experience.instance) {
@@ -40,7 +38,6 @@ export default class Experience {
         this.sizes = new Sizes()
         this.time = new Time()
         this.scene = new THREE.Scene()
-        this.debug = new GUI()
         this.resources = new Resources(sources)
         this.camera = new Camera()
         this.renderer = new Renderer()

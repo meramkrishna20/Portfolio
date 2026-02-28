@@ -35,13 +35,6 @@ export default class World {
         if (this.portfolioModel) {
             this.scene.add(this.portfolioModel.scene)
 
-            // Debug: log all names to find the screen
-            this.portfolioModel.scene.traverse((child: any) => {
-                if (child.isMesh) {
-                    console.log('Mesh name:', child.name)
-                }
-            })
-
             // Setup Camera Positions
             this.setupCamera()
 
