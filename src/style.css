@@ -1,0 +1,529 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap');
+
+/* ============================================================
+   BASE RESET & BODY
+   ============================================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #39ff14;
+    --green-dim: #1a8c07;
+    --green-glow: rgba(57, 255, 20, 0.15);
+    --red: #ff5f57;
+    --yellow: #febc2e;
+    --bg: #0a0f0a;
+    --surface: #0d140d;
+    --border: #1f2e1f;
+    --text: #c8e6c8;
+    --dim: #4a664a;
+    --font: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+body {
+    background: var(--bg);
+    font-family: var(--font);
+    overflow: hidden;
+    color: var(--text);
+}
+
+/* ============================================================
+   CANVAS  &  APP (3D LAYERS)
+   ============================================================ */
+#webgl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#app {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+/* ============================================================
+   INTRO / TERMINAL OVERLAY
+   ============================================================ */
+#intro-ui {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #0d180d 0%, #050905 100%);
+    /* Scan-line overlay */
+    background-image:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.08) 0px,
+            rgba(0, 0, 0, 0.08) 1px,
+            transparent 1px,
+            transparent 3px),
+        radial-gradient(ellipse at center, #0d180d 0%, #050905 100%);
+    cursor: none;
+}
+
+/* ============================================================
+   TERMINAL WINDOW
+   ============================================================ */
+#terminal {
+    width: min(860px, 96vw);
+    max-height: 88vh;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow:
+        0 0 0 1px #0d1e0d,
+        0 0 60px rgba(57, 255, 20, 0.08),
+        0 30px 80px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- header bar ---- */
+#terminal-header {
+    background: #111a11;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    user-select: none;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red {
+    background: var(--red);
+    box-shadow: 0 0 6px rgba(255, 95, 87, 0.6);
+}
+
+.dot.yellow {
+    background: var(--yellow);
+    box-shadow: 0 0 6px rgba(254, 188, 46, 0.4);
+}
+
+.dot.green {
+    background: var(--green);
+    box-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
+}
+
+#terminal-title {
+    margin-left: 10px;
+    font-size: 0.78rem;
+    color: var(--dim);
+    letter-spacing: 0.04em;
+}
+
+/* ---- body ---- */
+#terminal-body {
+    background: var(--surface);
+    padding: 20px 24px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--green-dim) transparent;
+}
+
+#terminal-body::-webkit-scrollbar {
+    width: 4px;
+}
+
+#terminal-body::-webkit-scrollbar-thumb {
+    background: var(--green-dim);
+    border-radius: 4px;
+}
+
+/* ============================================================
+   TERMINAL LINE STYLES
+   ============================================================ */
+.t-line {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.t-line.ok::before {
+    content: '';
+}
+
+.t-line.ok {
+    color: var(--green);
+}
+
+.t-line.ok .caret {
+    color: var(--green);
+}
+
+.t-line.cmd {
+    color: #7fff7f;
+}
+
+.t-line.cmd::before {
+    content: '$ ';
+    color: var(--green);
+}
+
+.t-line.dim {
+    color: var(--dim);
+    font-size: 0.76rem;
+}
+
+.t-line.warn {
+    color: var(--yellow);
+}
+
+.ok-bracket {
+    color: var(--green);
+}
+
+/* ============================================================
+   PROGRESS SECTION
+   ============================================================ */
+#progress-section {
+    margin-top: 10px;
+}
+
+#progress-label {
+    font-size: 0.8rem;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+#progress-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--green);
+}
+
+.bar-prefix,
+.bar-suffix {
+    color: var(--dim);
+    font-weight: 700;
+}
+
+#progress-bar-inner {
+    flex: 1;
+    height: 10px;
+    background: #111c11;
+    border: 1px solid var(--green-dim);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+#progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--green-dim) 0%, var(--green) 100%);
+    box-shadow: 0 0 10px var(--green);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+#progress-pct {
+    min-width: 38px;
+    text-align: right;
+    color: var(--green);
+    font-size: 0.78rem;
+}
+
+/* ============================================================
+   READY SECTION
+   ============================================================ */
+#ready-section {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#ready-msg {
+    font-size: 0.82rem;
+    color: var(--text);
+}
+
+#enter-btn {
+    align-self: flex-start;
+    background: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-family: var(--font);
+    font-size: 0.88rem;
+    padding: 10px 22px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.1);
+}
+
+#enter-btn:hover {
+    background: var(--green);
+    color: #000;
+    box-shadow: 0 0 24px rgba(57, 255, 20, 0.45);
+}
+
+#enter-btn .prompt {
+    margin-right: 6px;
+    color: inherit;
+}
+
+/* ============================================================
+   CURSOR LINE
+   ============================================================ */
+#cursor-line {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    color: var(--dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.prompt-text {
+    color: var(--green-dim);
+}
+
+#blink-cursor {
+    color: var(--green);
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ============================================================
+   HIGHLIGHT / UTILITY
+   ============================================================ */
+.hl {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.caret {
+    display: inline-block;
+    color: var(--green);
+    animation: blink 0.7s step-start infinite;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+    #terminal-body {
+        padding: 14px 16px;
+    }
+
+    .t-line {
+        font-size: 0.74rem;
+    }
+}
+
+/* ============================================================
+   SECOND OVERLAY — PRESS ENTER
+   ============================================================ */
+#press-enter-ui {
+    position: fixed;
+    inset: 0;
+    z-index: 102;
+    /* Above first terminal (z-index 100) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 9, 5, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: opacity 0.6s ease;
+}
+
+#pe-terminal {
+    cursor: none;
+    width: min(520px, 92vw);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow:
+        0 0 0 1px #0d1e0d,
+        0 0 50px rgba(57, 255, 20, 0.12),
+        0 30px 80px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#pe-header {
+    background: #111a11;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.pe-title {
+    margin-left: 10px;
+    font-size: 0.78rem;
+    color: var(--dim);
+    font-family: var(--font);
+    letter-spacing: 0.04em;
+}
+
+#pe-body {
+    background: var(--surface);
+    padding: 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--font);
+    cursor: none;
+    /* Removed the pointer cursor */
+}
+
+#pe-prompt {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.65;
+    }
+}
+
+#pe-prompt kbd {
+    display: inline-block;
+    background: #0f1f0f;
+    border: 1px solid var(--green-dim);
+    border-bottom: 3px solid var(--green-dim);
+    color: var(--green);
+    font-family: var(--font);
+    font-size: 0.82rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.15);
+    letter-spacing: 0.08em;
+}
+
+.pe-blink {
+    color: var(--green);
+    animation: blink 1s step-start infinite;
+    margin-left: 4px;
+}
+
+/* Progress bar inside second terminal */
+#pe-progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 0.82rem;
+    color: var(--green);
+}
+
+#pe-bar-inner {
+    flex: 1;
+    height: 10px;
+    background: #111c11;
+    border: 1px solid var(--green-dim);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+#pe-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--green-dim) 0%, var(--green) 100%);
+    box-shadow: 0 0 10px var(--green);
+    border-radius: 2px;
+    /* transition intentionally omitted — JS animates via rAF */
+}
+
+#pe-pct {
+    min-width: 38px;
+    text-align: right;
+    font-size: 0.78rem;
+    color: var(--green);
+}
+
+#pe-prompt {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text);
+    animation: pulseGlow 2s ease-in-out infinite;
+}

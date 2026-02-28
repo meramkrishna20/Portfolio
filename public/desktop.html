@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhisan OS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/desktop/css/os.css">
+    <link rel="stylesheet" href="/desktop/css/apps.css">
+    <link rel="stylesheet" href="/desktop/css/terminal.css">
+</head>
+
+<body>
+
+    <!-- ─── POWER OFF SCREEN ─── -->
+    <div id="power-screen" class="hidden">
+        <div class="pw-content">
+            <i class="fa-solid fa-power-off pw-icon"></i>
+            <p class="pw-title">System Powered Off</p>
+            <p class="pw-hint">
+                Press <kbd>Space</kbd> or click the
+                <i class="fa-solid fa-power-off"></i> button in the taskbar to restart
+            </p>
+        </div>
+    </div>
+
+    <!-- Desktop Background -->
+    <div id="desktop-bg" style="background-image: url('/desktop/images/wallpaper.jpg');"></div>
+
+    <!-- Desktop Icons -->
+    <div id="desktop-icons">
+        <div class="d-icon" data-app="cv" ondblclick="OS.openApp('cv')">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Portfolio.pdf</span>
+        </div>
+        <div class="d-icon" data-app="spotify" ondblclick="OS.openApp('spotify')">
+            <i class="fa-brands fa-spotify"></i>
+            <span>Spotify</span>
+        </div>
+        <div class="d-icon" data-app="vlc" ondblclick="OS.openApp('vlc')">
+            <i class="fa-solid fa-film"></i>
+            <span>VLC Player</span>
+        </div>
+        <div class="d-icon" data-app="terminal" ondblclick="OS.openApp('terminal')">
+            <i class="fa-solid fa-terminal"></i>
+            <span>Terminal</span>
+        </div>
+    </div>
+
+    <!-- Window Container -->
+    <div id="window-area"></div>
+
+    <!-- Taskbar -->
+    <div id="taskbar">
+        <div class="t-start" id="start-btn">
+            <i class="fa-brands fa-linux"></i> Menu
+        </div>
+
+        <div class="t-apps" id="taskbar-apps"></div>
+
+        <div class="t-system">
+            <div class="sys-tray">
+                <i class="fa-solid fa-wifi"></i>
+                <i class="fa-solid fa-volume-high"></i>
+                <i class="fa-solid fa-battery-full"></i>
+            </div>
+            <div id="clock">12:00 AM</div>
+            <button id="power-btn" title="Power off" onclick="OS.powerOff()">
+                <i class="fa-solid fa-power-off"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu" class="hidden">
+        <div class="sm-sidebar">
+            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-gear"></i>
+            <i class="fa-solid fa-power-off" onclick="OS.powerOff()"></i>
+        </div>
+        <div class="sm-apps">
+            <div class="sm-item" onclick="OS.openApp('cv'); OS.toggleStart()">
+                <i class="fa-solid fa-file-pdf"></i> Portfolio.pdf
+            </div>
+            <div class="sm-item" onclick="OS.openApp('spotify'); OS.toggleStart()">
+                <i class="fa-brands fa-spotify"></i> Spotify
+            </div>
+            <div class="sm-item" onclick="OS.openApp('vlc'); OS.toggleStart()">
+                <i class="fa-solid fa-film"></i> VLC Player
+            </div>
+            <div class="sm-item" onclick="OS.openApp('terminal'); OS.toggleStart()">
+                <i class="fa-solid fa-terminal"></i> Terminal
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── APP TEMPLATES ─── -->
+
+    <!-- SPOTIFY -->
+    <template id="tpl-spotify">
+        <div class="app-spotify">
+            <!-- Sidebar -->
+            <div class="s-sidebar">
+                <div class="s-logo">
+                    <i class="fa-brands fa-spotify"></i>
+                    <span>Spotify</span>
+                </div>
+                <ul class="s-nav">
+                    <li class="s-nav-active"><i class="fa-solid fa-house"></i> Home</li>
+                    <li><i class="fa-solid fa-magnifying-glass"></i> Search</li>
+                    <li><i class="fa-solid fa-book"></i> Your Library</li>
+                </ul>
+                <div class="s-library-section">
+                    <div class="s-lib-header">
+                        <span>My Playlists</span>
+                        <i class="fa-solid fa-plus s-lib-add"></i>
+                    </div>
+                    <div class="s-playlist-item active-playlist">
+                        <img src="/desktop/images/cover_pain.png" class="s-pl-cover" alt="">
+                        <div class="s-pl-info">
+                            <span class="s-pl-name">Bhisan's Mix</span>
+                            <span class="s-pl-meta">Playlist • 3 songs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="s-main">
+                <!-- Gradient header -->
+                <div class="s-hero">
+                    <img src="/desktop/images/cover_pain.png" class="s-hero-cover" alt="Playlist Cover">
+                    <div class="s-hero-info">
+                        <span class="s-hero-label">PLAYLIST</span>
+                        <h1 class="s-hero-title">Bhisan's Mix</h1>
+                        <p class="s-hero-meta">Bhisan • 3 songs, about 8 min</p>
+                    </div>
+                </div>
+
+                <!-- Controls row -->
+                <div class="s-controls-row">
+                    <button class="s-big-play" id="sp-big-play" onclick="">
+                        <i class="fa-solid fa-circle-play"></i>
+                    </button>
+                    <button class="s-shuffle-btn"><i class="fa-solid fa-shuffle"></i></button>
+                    <button class="s-repeat-btn"><i class="fa-solid fa-repeat"></i></button>
+                </div>
+
+                <!-- Track list header -->
+                <div class="s-tracklist-head">
+                    <span class="th-num">#</span>
+                    <span class="th-title">TITLE</span>
+                    <span class="th-duration"><i class="fa-regular fa-clock"></i></span>
+                </div>
+                <div class="s-tracks" id="spotify-tracks"></div>
+            </div>
+
+            <!-- Bottom player bar -->
+            <div class="s-player">
+                <div class="p-info">
+                    <img id="sp-cover" src="/desktop/images/cover_pain.png" width="56" height="56" alt="cover"
+                        style="border-radius:4px;">
+                    <div class="p-text">
+                        <h4 id="sp-title">Select a track</h4>
+                        <span id="sp-artist">...</span>
+                    </div>
+                    <i class="fa-regular fa-heart p-heart"></i>
+                </div>
+                <div class="p-controls">
+                    <div class="p-btns">
+                        <button class="p-btn-sm"><i class="fa-solid fa-shuffle"></i></button>
+                        <button id="sp-prev" class="p-btn-sm"><i class="fa-solid fa-backward-step"></i></button>
+                        <button id="sp-play" class="play-btn"><i class="fa-solid fa-circle-play"></i></button>
+                        <button id="sp-next" class="p-btn-sm"><i class="fa-solid fa-forward-step"></i></button>
+                        <button class="p-btn-sm"><i class="fa-solid fa-repeat"></i></button>
+                    </div>
+                    <div class="p-progress">
+                        <span id="sp-time-cur">0:00</span>
+                        <div class="p-seek-wrap">
+                            <input type="range" id="sp-seek" value="0" min="0" max="100" style="--pct:0%">
+                        </div>
+                        <span id="sp-time-tot">0:00</span>
+                    </div>
+                </div>
+                <div class="p-vol">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <input type="range" id="sp-vol" value="100" min="0" max="100">
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- TERMINAL -->
+    <template id="tpl-terminal">
+        <div class="app-terminal">
+            <div class="term-output" id="term-output"></div>
+            <div class="term-input-row">
+                <span class="term-ps1">
+                    <span class="ps1-user">bhisan</span><span class="ps1-host">@portfolio</span>:<span
+                        class="ps1-dir">~</span>$
+                </span>
+                <input class="term-input" type="text" autocomplete="off" spellcheck="false"
+                    placeholder="type a command...">
+            </div>
+        </div>
+    </template>
+
+    <!-- VLC -->
+    <template id="tpl-vlc">
+        <div class="app-vlc">
+            <div class="vlc-video-container">
+                <video id="vlc-vid" src="/desktop/media/demo_video.mp4" playsinline></video>
+            </div>
+            <div class="vlc-controls">
+                <div class="v-progress">
+                    <input type="range" id="vlc-seek" value="0" min="0" max="100">
+                </div>
+                <div class="v-btns">
+                    <button id="vlc-play"><i class="fa-solid fa-play"></i></button>
+                    <button id="vlc-stop"><i class="fa-solid fa-stop"></i></button>
+                    <span class="vlc-time" id="vlc-time">00:00 / 00:00</span>
+                    <div style="flex:1"></div>
+                    <button id="vlc-fullscreen"><i class="fa-solid fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- CV -->
+    <template id="tpl-cv">
+        <div class="app-cv">
+            <div class="cv-header">
+                <h1>Bhisan</h1>
+                <p>Software Developer &amp; 3D Enthusiast</p>
+            </div>
+            <div class="cv-body">
+                <h3>Experience</h3>
+                <ul>
+                    <li><strong>Frontend Dev</strong> — Building cool things with React &amp; Three.js</li>
+                    <li><strong>UI/UX</strong> — Creating hacker-themed desktop OS clones</li>
+                </ul>
+                <br>
+                <h3>Skills</h3>
+                <p>TypeScript, WebGL, Node.js, GSAP, Blender</p>
+                <br>
+                <p style="color:var(--green)">> Replace this placeholder with your actual CV/Portfolio content later!
+                </p>
+            </div>
+        </div>
+    </template>
+
+    <script src="/desktop/js/os.js"></script>
+    <script src="/desktop/js/spotify.js"></script>
+    <script src="/desktop/js/vlc.js"></script>
+    <script src="/desktop/js/terminal.js"></script>
+</body>
+
+</html>

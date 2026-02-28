@@ -1,0 +1,201 @@
+/* ═══════════════════════════════════════════════════
+   TERMINAL APP
+   ═══════════════════════════════════════════════════ */
+.app-terminal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #0d0d0d;
+    font-family: 'Share Tech Mono', monospace;
+    color: #00e5ff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scanline overlay for CRT vibe */
+.app-terminal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to bottom,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.08) 2px,
+            rgba(0, 0, 0, 0.08) 4px);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Vignette edges */
+.app-terminal::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.55) 100%);
+    pointer-events: none;
+    z-index: 11;
+}
+
+.term-output {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 229, 255, 0.3) transparent;
+}
+
+.term-output::-webkit-scrollbar {
+    width: 4px;
+}
+
+.term-output::-webkit-scrollbar-thumb {
+    background: rgba(0, 229, 255, 0.3);
+    border-radius: 2px;
+}
+
+.term-line {
+    font-size: 1rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.term-line.glitch {
+    animation: termGlitch 0.06s steps(1) 2;
+}
+
+@keyframes termGlitch {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+        color: #00e5ff;
+    }
+
+    33% {
+        opacity: 0.4;
+        transform: translateX(-3px);
+        color: #ff0080;
+        filter: blur(1px);
+    }
+
+    66% {
+        opacity: 0.8;
+        transform: translateX(3px);
+        color: #00ff9f;
+        filter: blur(0.5px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        color: #00e5ff;
+    }
+}
+
+.term-line.dim {
+    color: #3a5060;
+}
+
+.term-line.bright {
+    color: #ffffff;
+}
+
+.term-line.green {
+    color: #00ff88;
+}
+
+.term-line.red {
+    color: #ff4060;
+}
+
+.term-line.yellow {
+    color: #ffd700;
+}
+
+.term-line.prompt {
+    color: #00e5ff;
+}
+
+/* RGB glitch flash */
+@keyframes termFlash {
+    0% {
+        background: rgba(0, 229, 255, 0.08);
+    }
+
+    50% {
+        background: rgba(255, 0, 128, 0.10);
+    }
+
+    100% {
+        background: transparent;
+    }
+}
+
+.term-flash {
+    animation: termFlash 0.15s ease-out;
+}
+
+/* Input row */
+.term-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-top: 1px solid rgba(0, 229, 255, 0.15);
+    background: rgba(0, 229, 255, 0.03);
+    flex-shrink: 0;
+}
+
+.term-ps1 {
+    font-size: 1rem;
+    color: #00e5ff;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.term-ps1 .ps1-user {
+    color: #00ff88;
+}
+
+.term-ps1 .ps1-host {
+    color: #4dd0e1;
+}
+
+.term-ps1 .ps1-dir {
+    color: #7986cb;
+}
+
+.term-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    color: #e0e0e0;
+    caret-color: #00e5ff;
+}
+
+/* Blinking cursor when focused */
+.term-input:focus {
+    caret-color: #00e5ff;
+}
+
+/* Boot sequence progress */
+.term-boot-bar {
+    height: 3px;
+    background: rgba(0, 229, 255, 0.15);
+    margin: 6px 0;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.1s linear;
+}
+
+.term-boot-bar.fill {
+    background: #00e5ff;
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Bhisan — 3D Portfolio</title>
+  <!-- Critical CSS: prevents white flash before stylesheet loads -->
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #050905;
+      overflow: hidden;
+      color: #c8e6c8;
+    }
+
+    #intro-ui {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050905;
+      transition: opacity 0.8s ease;
+    }
+
+    #terminal {
+      cursor: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #webgl {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    #app {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 3D Experience Canvas Container -->
+  <canvas id="webgl"></canvas>
+
+  <!-- CSS3D Layer Container (Managed by CSS3DRenderer) -->
+  <div id="app"></div>
+
+  <!-- Terminal Loading Screen Overlay -->
+  <div id="intro-ui">
+    <div id="terminal">
+      <div id="terminal-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span id="terminal-title">bhisan@portfolio:~</span>
+      </div>
+      <div id="terminal-body">
+        <div id="boot-lines"></div>
+        <div id="progress-section" class="hidden">
+          <div id="progress-label"></div>
+          <div id="progress-bar-wrap">
+            <span class="bar-prefix">[</span>
+            <div id="progress-bar-inner">
+              <div id="progress-fill"></div>
+            </div>
+            <span class="bar-suffix">]</span>
+            <span id="progress-pct">0%</span>
+          </div>
+        </div>
+        <div id="cursor-line">
+          <span class="prompt-text">bhisan@portfolio:~$</span>
+          <span id="blink-cursor">█</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Overlay: Press Enter to Continue -->
+  <div id="press-enter-ui">
+    <div id="pe-terminal">
+      <div id="pe-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="pe-title">bhisan@portfolio:~ — 3D Environment</span>
+      </div>
+      <div id="pe-body">
+        <div class="t-line ok">[ OK ] 3D environment initialized.</div>
+        <div class="t-line ok">[ OK ] Baked textures applied.</div>
+        <div class="t-line ok">[ OK ] Camera rig calibrated.</div>
+        <div class="t-line cmd" style="margin-top:8px">$ compiling scene pipeline...</div>
+
+        <!-- Live progress bar -->
+        <div id="pe-progress-wrap">
+          <span class="bar-prefix">[</span>
+          <div id="pe-bar-inner">
+            <div id="pe-fill"></div>
+          </div>
+          <span class="bar-suffix">]</span>
+          <span id="pe-pct">0%</span>
+        </div>
+
+        <!-- Dynamic status text -->
+        <div id="pe-status" class="t-line dim" style="margin-top:6px"></div>
+
+        <!-- Hidden until 100% -->
+        <div id="pe-prompt" class="hidden">
+          <span class="prompt-text">Press</span>
+          <kbd>ENTER</kbd>
+          <span class="prompt-text">or click anywhere to continue</span>
+          <span class="pe-blink">█</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

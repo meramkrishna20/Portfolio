@@ -1,0 +1,660 @@
+/* ═══════════════════════════════════════════════════
+   APPS — General
+   ═══════════════════════════════════════════════════ */
+.app-spotify,
+.app-vlc,
+.app-cv {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+/* ═══════════════════════════════════════════════════
+   SPOTIFY
+   ═══════════════════════════════════════════════════ */
+.app-spotify {
+    background: #121212;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    flex-direction: row;
+    position: relative;
+}
+
+/* ── Sidebar ─────────────────────────────────────── */
+.s-sidebar {
+    width: 280px;
+    min-width: 220px;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0 0;
+    gap: 0;
+    overflow: hidden;
+}
+
+.s-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px 20px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.s-logo i {
+    font-size: 1.8rem;
+    color: #1db954;
+}
+
+.s-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 10px;
+}
+
+.s-nav li {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #b3b3b3;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.s-nav li:hover {
+    color: #fff;
+}
+
+.s-nav-active {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.s-nav i {
+    font-size: 1.2rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Library section */
+.s-library-section {
+    flex: 1;
+    margin-top: 16px;
+    border-top: 1px solid #1a1a1a;
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+}
+
+.s-lib-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    color: #b3b3b3;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.s-lib-add {
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.s-lib-add:hover {
+    color: #fff;
+}
+
+.s-playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.s-playlist-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.active-playlist {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.s-pl-cover {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.s-pl-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.s-pl-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.s-pl-meta {
+    font-size: 0.78rem;
+    color: #b3b3b3;
+}
+
+/* ── Main content ────────────────────────────────── */
+.s-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-bottom: 90px;
+    background: #121212;
+}
+
+/* Hero */
+.s-hero {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    padding: 28px 28px 20px;
+    background: linear-gradient(180deg, #2a1a2e 0%, #1a1a1a 100%);
+    flex-shrink: 0;
+}
+
+.s-hero-cover {
+    width: 160px;
+    height: 160px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    flex-shrink: 0;
+}
+
+.s-hero-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 4px;
+}
+
+.s-hero-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.s-hero-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+}
+
+.s-hero-meta {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+}
+
+/* Controls row below hero */
+.s-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 28px;
+    background: linear-gradient(180deg, #1a1a1a 0%, transparent 100%);
+    flex-shrink: 0;
+}
+
+.s-big-play {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #1db954;
+    font-size: 3.5rem;
+    line-height: 1;
+    transition: transform 0.1s, color 0.1s;
+    display: flex;
+    align-items: center;
+}
+
+.s-big-play:hover {
+    transform: scale(1.07);
+    color: #1ed760;
+}
+
+.s-shuffle-btn,
+.s-repeat-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b3b3b3;
+    font-size: 1.3rem;
+    transition: color 0.15s;
+}
+
+.s-shuffle-btn:hover,
+.s-repeat-btn:hover {
+    color: #fff;
+}
+
+/* Track list header */
+.s-tracklist-head {
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    padding: 8px 28px;
+    color: #b3b3b3;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+/* Tracks */
+.s-tracks {
+    padding: 8px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.s-track {
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    align-items: center;
+    padding: 8px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+
+.s-track:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.s-track.active {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.s-track.active .t-title {
+    color: #1db954;
+}
+
+.t-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.t-num {
+    color: #b3b3b3;
+    font-size: 0.95rem;
+    text-align: center;
+    min-width: 20px;
+}
+
+.t-cover {
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.t-name {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.t-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s;
+}
+
+.t-artist {
+    color: #b3b3b3;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.t-time {
+    color: #b3b3b3;
+    font-size: 0.88rem;
+    text-align: right;
+    padding-right: 4px;
+}
+
+/* ── Player bar ──────────────────────────────────── */
+.s-player {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 88px;
+    background: #181818;
+    border-top: 1px solid #282828;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 10;
+    gap: 12px;
+}
+
+.p-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 28%;
+    min-width: 0;
+}
+
+.p-text {
+    min-width: 0;
+}
+
+.p-text h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.p-text span {
+    font-size: 0.78rem;
+    color: #b3b3b3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.p-heart {
+    color: #b3b3b3;
+    cursor: pointer;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: color 0.15s;
+}
+
+.p-heart:hover {
+    color: #fff;
+}
+
+.p-controls {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    max-width: 45%;
+}
+
+.p-btns {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.p-btn-sm {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.15s;
+}
+
+.p-btn-sm:hover {
+    color: #fff;
+}
+
+.play-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.4rem;
+    cursor: pointer;
+    transition: transform 0.1s;
+    display: flex;
+    align-items: center;
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+.p-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    font-variant-numeric: tabular-nums;
+}
+
+.p-seek-wrap {
+    flex: 1;
+    position: relative;
+    height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+/* Seek / Vol sliders */
+#sp-seek,
+#sp-vol {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(to right, #1db954 var(--pct, 0%), #535353 var(--pct, 0%));
+    outline: none;
+    cursor: pointer;
+    transition: height 0.15s;
+}
+
+#sp-seek:hover,
+#sp-vol:hover {
+    height: 6px;
+}
+
+#sp-seek::-webkit-slider-thumb,
+#sp-vol::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+#sp-seek:hover::-webkit-slider-thumb,
+#sp-vol:hover::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+.p-vol {
+    width: 26%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    color: #b3b3b3;
+    font-size: 1rem;
+}
+
+#sp-vol {
+    --pct: 100%;
+    flex: 0 1 90px;
+}
+
+/* ═══════════════════════════════════════════════════
+   VLC
+   ═══════════════════════════════════════════════════ */
+.app-vlc {
+    background: #111;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    flex-direction: column;
+}
+
+.vlc-video-container {
+    flex: 1;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vlc-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.vlc-controls {
+    height: 56px;
+    background: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    padding: 4px 14px;
+    gap: 4px;
+    border-top: 1px solid #333;
+}
+
+.v-progress input {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 3px;
+    background: #555;
+    outline: none;
+    cursor: pointer;
+}
+
+.v-progress input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #ff7f00;
+    border-radius: 50%;
+}
+
+.v-btns {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex: 1;
+}
+
+.v-btns button {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.15s;
+}
+
+.v-btns button:hover {
+    color: #fff;
+}
+
+.vlc-time {
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+    color: #aaa;
+}
+
+/* ═══════════════════════════════════════════════════
+   CV / PORTFOLIO
+   ═══════════════════════════════════════════════════ */
+.app-cv {
+    flex-direction: column;
+    background: #0b1a0b;
+    color: var(--os-text);
+    font-family: var(--font-mono);
+    overflow-y: auto;
+}
+
+.cv-header {
+    padding: 40px;
+    background: #112011;
+    border-bottom: 2px solid var(--os-accent);
+    text-align: center;
+}
+
+.cv-header h1 {
+    font-size: 2.8rem;
+    color: var(--os-accent);
+    text-shadow: 0 0 14px rgba(0, 229, 255, 0.4);
+    margin-bottom: 8px;
+}
+
+.cv-body {
+    padding: 36px 40px;
+}
+
+.cv-body h3 {
+    color: var(--os-accent);
+    margin-bottom: 14px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.cv-body ul {
+    list-style: square;
+    padding-left: 18px;
+    line-height: 1.9;
+    font-size: 1.05rem;
+}
+
+.cv-body p {
+    font-size: 1.05rem;
+}
