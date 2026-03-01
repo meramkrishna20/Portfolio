@@ -34,9 +34,14 @@ export default class Camera {
             this.controls = new OrbitControls(this.instance, cssTarget)
             this.controls.enableDamping = true
             this.controls.enablePan = false // Usually don't want panning on portfolios
+            this.controls.enableRotate = false // Disabled until intro dolly finishes or user clicks
             this.controls.minDistance = 2
             this.controls.maxDistance = 15
         }, 10)
+    }
+
+    enableRotation() {
+        if (this.controls) this.controls.enableRotate = true
     }
 
     resize() {

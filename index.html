@@ -110,6 +110,77 @@
       max-width: 260px;
       line-height: 1.6;
     }
+
+    /* ── Click-to-begin orbit hint ─────────────────────────────── */
+    #click-hint {
+      position: fixed;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      padding: 14px 28px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.92rem;
+      color: #e8e8e8;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      pointer-events: none;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #click-hint.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Force hide when focused on monitor */
+    #click-hint.desktop-hidden {
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* When clicked, it moves to the bottom left */
+    #click-hint.moved {
+      left: 32px;
+      bottom: 32px;
+      transform: translateX(0) scale(0.9);
+      border-color: rgba(29, 185, 84, 0.4);
+      background: rgba(0, 0, 0, 0.6);
+      color: #1db954;
+    }
+
+    #click-hint.moved .ch-cursor {
+      background: #1db954;
+    }
+
+    #click-hint .ch-cursor {
+      display: inline-block;
+      width: 9px;
+      height: 1.1em;
+      background: #e8e8e8;
+      margin-left: 4px;
+      vertical-align: middle;
+      transition: background 0.6s ease;
+      animation: ch-blink 1s step-end infinite;
+    }
+
+    @keyframes ch-blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -121,6 +192,9 @@
     <h2>Rotate Your Device</h2>
     <p>This 3D portfolio is best experienced in <strong style="color:#1db954">landscape</strong> mode.</p>
   </div>
+
+  <!-- Orbit-view hint: shown after intro, hidden when user hovers monitor -->
+  <div id="click-hint"><span id="click-hint-text"></span><span class="ch-cursor"></span></div>
 
   <!-- 3D Experience Canvas Container -->
   <canvas id="webgl"></canvas>

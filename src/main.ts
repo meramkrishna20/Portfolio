@@ -135,9 +135,48 @@ async function runBootSequence(): Promise<void> {
   await sleep(80)
   await printLine(`$ loading ${sources.length} asset(s)...`, 'cmd', 14)
   await sleep(60)
+
+  // Mobile warning
+  if (window.innerWidth <= 1280 && 'ontouchstart' in window) {
+    await sleep(200)
+    await printLine('>> WARNING: Mobile device detected', 'warn', 12)
+    await printLine('>> Please switch to a Computer for the best experience.', 'warn', 12)
+    await sleep(400)
+  }
+
   progressSection.classList.remove('hidden')
   progressLabel.innerHTML = `<span class="prompt-text">→</span> Awaiting assets...`
 }
+
+// ----- CLICK-TO-BEGIN HINT -----
+const clickHint = document.getElementById('click-hint') as HTMLElement
+const clickHintText = document.getElementById('click-hint-text') as HTMLElement
+let hintActive = false
+
+window.addEventListener('portfolio-start', async () => {
+  hintActive = true
+  clickHint.classList.add('visible')
+
+  // Typewriter effect for the hint
+  const text = "Click anywhere to begin"
+  clickHintText.textContent = ""
+  for (let i = 0; i <= text.length; i++) {
+    if (!hintActive) break // stop typing if they click early
+    clickHintText.textContent = text.slice(0, i)
+    await sleep(40)
+  }
+})
+
+// Move it to the bottom-left universally when ANY interaction happens
+window.addEventListener('pointerdown', () => {
+  if (!hintActive) return
+  hintActive = false
+  clickHintText.textContent = "Orbit Mode Active"
+  clickHint.classList.add('moved')
+}, { once: true })
+
+window.addEventListener('monitor-focus', () => clickHint.classList.add('desktop-hidden'))
+window.addEventListener('orbit-return', () => clickHint.classList.remove('desktop-hidden'))
 
 // ----- INIT -----
 const canvas = document.querySelector('canvas#webgl') as HTMLCanvasElement

@@ -108,7 +108,7 @@ const SpotifyApp = {
             artist: 'Swoopna Suman',
             src: '/desktop/media/timroakhaa.mp3',
             duration: '5:23',
-            cover: '/desktop/images/timroakha.jpg'
+            cover: '/desktop/images/timroaakha.jpg'
         },
         {
             id: 't14',
@@ -232,8 +232,10 @@ const SpotifyApp = {
         if (title) title.textContent = track.title;
         if (artist) artist.textContent = track.artist;
 
+        // Only set the source. Do NOT call this.audio.load() here.
+        // Forcing load() downloads the heavy MP3 immediately, causing Vercel bandwidth lag.
+        // We let the browser handle streaming when play() is actually called.
         this.audio.src = track.src;
-        this.audio.load();
 
         playImmediate ? this.play() : this.pause();
     },

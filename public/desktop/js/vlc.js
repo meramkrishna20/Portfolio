@@ -5,6 +5,12 @@ const VlcApp = {
     init(el) {
         this.winEl = el;
         this.video = el.querySelector('#vlc-vid');
+
+        // Lazy load the video source so it doesn't freeze the initial website load 
+        if (!this.video.src || this.video.src === '') {
+            this.video.src = '/desktop/media/demo_video.mp4';
+        }
+
         this.bindEvents();
     },
 

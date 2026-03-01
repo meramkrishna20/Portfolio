@@ -102,7 +102,7 @@ const OS = {
         const floatSizes = {
             spotify: { w: '1060px', h: '720px' },
             vlc: { w: '900px', h: '600px' },
-            cv: { w: '550px', h: '640px' },
+            cv: { w: '1000px', h: '680px' }, // Made CV larger for the new premium layout
             terminal: { w: '820px', h: '560px' },
         };
         const fs = floatSizes[appId] || { w: '800px', h: '600px' };
@@ -145,6 +145,30 @@ const OS = {
         if (appId === 'spotify') {
             const bigPlay = winEl.querySelector('#sp-big-play');
             if (bigPlay) bigPlay.onclick = () => SpotifyApp.togglePlay();
+        }
+
+        // Wire Portfolio/CV Sidebar Navigation
+        if (appId === 'cv') {
+            const navBtns = winEl.querySelectorAll('.p-nav-btn');
+            const sections = winEl.querySelectorAll('.port-section');
+
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active nav button
+                    navBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    // Show target section, hide others
+                    const targetId = btn.dataset.target;
+                    sections.forEach(sec => {
+                        if (sec.id === targetId) {
+                            sec.classList.add('active');
+                        } else {
+                            sec.classList.remove('active');
+                        }
+                    });
+                });
+            });
         }
     },
 

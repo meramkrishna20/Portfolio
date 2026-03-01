@@ -109,6 +109,7 @@ export default class World {
         const camTarget = this.portfolioModel.scene.getObjectByName('CameraTarget')
         const deskPos = this.portfolioModel.scene.getObjectByName('CameraDesktopPosition')
         const deskTarget = this.portfolioModel.scene.getObjectByName('CameraDesktopTarget')
+        const hoverPos = this.portfolioModel.scene.getObjectByName('Camera_Monitor_Hover') // New Empty from Blender
 
         if (camPos && camTarget) {
             this.experience.camera.instance.position.copy(camPos.position)
@@ -140,8 +141,15 @@ export default class World {
         // Get world-space positions once model is loaded
         const deskPosWP = new THREE.Vector3()
         const deskTargetWP = new THREE.Vector3()
-        if (deskPos) deskPos.getWorldPosition(deskPosWP)
-        if (deskTarget) deskTarget.getWorldPosition(deskTargetWP)
+        const hoverPosWP = new THREE.Vector3()
+
+        if (deskPos && deskTarget) {
+            deskPos.getWorldPosition(deskPosWP)
+            deskTarget.getWorldPosition(deskTargetWP)
+        }
+        if (hoverPos) {
+            hoverPos.getWorldPosition(hoverPosWP)
+        }
 
         let isHoveringMonitor = false
         let isDesktopPhase = false   // true only after first hover/click onto desk view
@@ -183,6 +191,7 @@ export default class World {
                 const hitMonitor = hits.some(h => MONITOR_HOVER_NAMES.has(h.object.name))
 
                 if (!hitMonitor) {
+                    window.dispatchEvent(new CustomEvent('orbit-return'))
                     window.removeEventListener('click', onClickOut)
                     stage3Active = false
                     isDesktopPhase = false
@@ -229,11 +238,23 @@ export default class World {
             // ── Enter hover ────────────────────────────────────────────────────
             if (hoveringNow && !isHoveringMonitor) {
                 isHoveringMonitor = true
+                window.dispatchEvent(new CustomEvent('monitor-focus'))
 
                 // During orbit: freeze dummy.angle so we can return to exact spot later
                 if (!isDesktopPhase && dollyAnim) dollyAnim.pause()
 
-                if (deskPos && deskTarget) {
+                // If hover empty exists, use it. Otherwise fallback to desktop position
+                if (hoverPos && deskTarget) {
+                    gsap.to(this.experience.camera.instance.position, {
+                        x: hoverPosWP.x, y: hoverPosWP.y, z: hoverPosWP.z,
+                        duration: 1.2, ease: 'power2.out', overwrite: 'auto',
+                    })
+                    gsap.to(this.experience.camera.controls.target, {
+                        x: deskTargetWP.x, y: deskTargetWP.y, z: deskTargetWP.z,
+                        duration: 1.2, ease: 'power2.out', overwrite: 'auto',
+                        onUpdate: () => { void this.experience.camera.controls.update() }
+                    })
+                } else if (deskPos && deskTarget) {
                     gsap.to(this.experience.camera.instance.position, {
                         x: deskPosWP.x, y: deskPosWP.y, z: deskPosWP.z,
                         duration: 1.2, ease: 'power2.out', overwrite: 'auto',
@@ -289,7 +310,18 @@ export default class World {
             if (e.data?.type === 'os-mousemove' && !isHoveringMonitor) {
                 isHoveringMonitor = true
                 if (!isDesktopPhase && dollyAnim) dollyAnim.pause()
-                if (deskPos && deskTarget) {
+
+                if (hoverPos && deskTarget) {
+                    gsap.to(this.experience.camera.instance.position, {
+                        x: hoverPosWP.x, y: hoverPosWP.y, z: hoverPosWP.z,
+                        duration: 1.2, ease: 'power2.out', overwrite: 'auto'
+                    })
+                    gsap.to(this.experience.camera.controls.target, {
+                        x: deskTargetWP.x, y: deskTargetWP.y, z: deskTargetWP.z,
+                        duration: 1.2, ease: 'power2.out', overwrite: 'auto',
+                        onUpdate: () => { void this.experience.camera.controls.update() }
+                    })
+                } else if (deskPos && deskTarget) {
                     gsap.to(this.experience.camera.instance.position, {
                         x: deskPosWP.x, y: deskPosWP.y, z: deskPosWP.z,
                         duration: 1.2, ease: 'power2.out', overwrite: 'auto'
@@ -338,6 +370,11 @@ export default class World {
             onSceneClick = () => {
                 if (!portfolioStarted || isDesktopPhase) return  // already in desktop from hover
                 if (dollyAnim) dollyAnim.pause()
+
+                // Unlock manual orbit controls
+                this.experience.camera.enableRotation()
+                window.dispatchEvent(new CustomEvent('monitor-focus'))
+
                 isDesktopPhase = true
                 isTransitioning = true
 

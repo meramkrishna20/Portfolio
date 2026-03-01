@@ -217,7 +217,7 @@
     <template id="tpl-vlc">
         <div class="app-vlc">
             <div class="vlc-video-container">
-                <video id="vlc-vid" src="/desktop/media/demo_video.mp4" playsinline></video>
+                <video id="vlc-vid" preload="none" playsinline></video>
             </div>
             <div class="vlc-controls">
                 <div class="v-progress">
@@ -234,26 +234,218 @@
         </div>
     </template>
 
-    <!-- CV -->
+    <!-- CV / PORTFOLIO -->
     <template id="tpl-cv">
-        <div class="app-cv">
-            <div class="cv-header">
-                <h1>Bhisan</h1>
-                <p>Software Developer &amp; 3D Enthusiast</p>
-            </div>
-            <div class="cv-body">
-                <h3>Experience</h3>
-                <ul>
-                    <li><strong>Frontend Dev</strong> — Building cool things with React &amp; Three.js</li>
-                    <li><strong>UI/UX</strong> — Creating hacker-themed desktop OS clones</li>
-                </ul>
-                <br>
-                <h3>Skills</h3>
-                <p>TypeScript, WebGL, Node.js, GSAP, Blender</p>
-                <br>
-                <p style="color:var(--green)">> Replace this placeholder with your actual CV/Portfolio content later!
-                </p>
-            </div>
+        <div class="app-portfolio">
+            <!-- Sidebar Navigation -->
+            <nav class="port-sidebar">
+                <div class="port-profile">
+                    <div class="port-avatar"><i class="fa-solid fa-code"></i></div>
+                    <h2>Bhisan</h2>
+                    <p>Developer/Tech Enthusiast</p>
+                </div>
+                <nav class="port-nav">
+                    <button class="p-nav-btn active" data-target="p-home">
+                        <i class="fa-solid fa-house"></i> Home
+                    </button>
+                    <button class="p-nav-btn" data-target="p-about">
+                        <i class="fa-solid fa-user"></i> About Me
+                    </button>
+                    <button class="p-nav-btn" data-target="p-hobbies">
+                        <i class="fa-solid fa-gamepad"></i> Hobbies
+                    </button>
+                    <button class="p-nav-btn" data-target="p-skills">
+                        <i class="fa-solid fa-file-contract"></i> Skills & CV
+                    </button>
+                </nav>
+                <div class="port-quote">
+                    "I don't know everything. But I know how to find it, break it, fix it, and pretend I knew all
+                    along."
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <main class="port-content">
+
+                <!-- HOME SECTION -->
+                <section id="p-home" class="port-section active">
+                    <div class="p-header">
+                        <h1>What brings you here?</h1>
+                        <div class="p-accent-line"></div>
+                    </div>
+                    <div class="p-body">
+                        <p class="p-lead">
+                            Hi, I'm <span class="p-highlight">Bhisan Gaire</span> — a Full Stack Web Developer and
+                            certified tech enthusiast who just survived a BCA degree at Patan Multiple Campus (Feb 2026,
+                            officially unleashed).
+                        </p>
+                        <p>
+                            Also a highly passionate video editor (half-baked, but the ambition is fully cooked).
+                            Currently "working on myself," which is a fancy way of saying I'm broke 😂.
+                        </p>
+                        <p>
+                            I'm the kind of person who'll learn anything cool at 2am, go down rabbit holes the internet
+                            tried to hide, and somehow turn it into a side project nobody asked for. The stack is solid.
+                            The editing timeline? Chaotic. The bank account? Let's not talk about it.
+                        </p>
+
+                        <div class="p-img-grid">
+                            <!-- Added actual images -->
+                            <div class="p-img-placeholder tall">
+                                <img src="/desktop/images/littleone.PNG" alt="Little One" class="p-photo" />
+                            </div>
+                            <div class="p-img-placeholder wide">
+                                <img src="/desktop/images/ai.png" alt="AI" class="p-photo" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ABOUT SECTION -->
+                <section id="p-about" class="port-section">
+                    <div class="p-header">
+                        <h1>About Me</h1>
+                        <div class="p-accent-line"></div>
+                    </div>
+                    <div class="p-body">
+                        <div class="p-row">
+                            <div class="p-col">
+                                <p>
+                                    I was born an introvert — and I mean that in the most clinical way possible. Crowds?
+                                    No thanks. Small talk? I'd rather debug a 500-line error with no Stack Overflow. I
+                                    could go an entire week without uttering a single word to another human and
+                                    genuinely not notice. My longest, deepest, most intellectual conversations have
+                                    always been with myself. I'm great company, apparently.
+                                </p>
+                                <p>
+                                    School was... an experience. I never remember enjoying studying, but I had a very
+                                    special talent — the ability to absorb an entire semester the night before the exam
+                                    and walk out like nothing happened. A few hours of panic, a cup of something warm,
+                                    and somehow it worked every time. Still does. Is it a bad habit? Yes. Am I fixing
+                                    it? Absolutely not.
+                                </p>
+                            </div>
+                            <!-- Image slot -->
+                            <div class="p-img-placeholder polaroid right-tilt">
+                                <img src="/desktop/images/computer.png" alt="Portrait" class="p-photo" />
+                            </div>
+                        </div>
+
+                        <p>
+                            I was born in Palpa, around 2003 — a peaceful beginning before life decided to keep
+                            relocating me. Class 1 through 5 in one place, then back to my hometown where I completed my
+                            SEE from Darlamdanda Secondary School (survived). Then Kathmandu happened. Joined Pentagon
+                            International College, Tinkune for Science in +2 (also survived), and eventually made it to
+                            Patan Multiple Campus where I completed my BCA in February 2026 (barely, but a pass is a
+                            pass).
+                        </p>
+                        <p class="p-punchline">
+                            Somewhere between the late nights, the rabbit holes, the silent rooms, and the very
+                            questionable life choices — I found <span class="p-highlight">tech</span>. And unlike group
+                            projects, deadlines, and social gatherings, it's something I actually want to show up for.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- HOBBIES SECTION -->
+                <section id="p-hobbies" class="port-section">
+                    <div class="p-header">
+                        <h1>Hobbies <span class="p-subtitle">& Impulses</span></h1>
+                        <div class="p-accent-line"></div>
+                    </div>
+                    <div class="p-body">
+                        <p class="p-lead">Some people have structured hobbies. I have impulses. 🤷‍♂️</p>
+
+                        <div class="p-row">
+                            <!-- Image slot -->
+                            <div class="p-img-placeholder polaroid" style="transform: rotate(-3deg);">
+                                <img src="/desktop/images/walk.PNG" alt="Random Escape" class="p-photo" />
+                            </div>
+
+                            <div class="p-col">
+                                <p>
+                                    <strong>The Random Escapes:</strong> Waking up one random morning and deciding today
+                                    is the day I disappear into the hills somewhere — no plan, no crowd, just me, some
+                                    trees, and the kind of silence that actually makes sense to me 🌿.
+                                </p>
+                                <p>
+                                    <strong>Music & Mind:</strong> Used to write songs. Now I've reached a point where I
+                                    can hear a song in my head so vividly the entire environment just starts playing it
+                                    for me. Either a superpower or a symptom. 🎵
+                                </p>
+                                <p>
+                                    <strong>The Blender Grind:</strong> Currently my biggest dopamine hit. My laptop
+                                    sounds like it's filing a formal complaint. The fan is screaming. The temperature is
+                                    concerning. And I simply do not care. 🔥💀
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-row">
+                            <div class="p-col">
+                                <p>
+                                    <strong>2AM Tech Holes:</strong> Video editing, digital art, gaming, Kali Linux,
+                                    dark corners of the internet 🕳️, hacking concepts, flipping operating systems. If
+                                    it exists on a screen, I've poked at it.
+                                </p>
+                                <p class="mt-4 p-punchline">
+                                    <strong>Oh and — yes, that's Zoro everywhere.</strong> No, I'm not an anime freak.
+                                    I've watched exactly one anime in my life — One Piece. Zoro inspires me — the
+                                    dedication, the grind, the absolute refusal to give up. The only thing I'm not
+                                    taking from him is his sense of direction.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-img-placeholder wide glass-frame mt-4">
+                            <img src="/desktop/images/back.jpeg" alt="Hobby Screenshot" class="p-photo" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SKILLS / CV SECTION -->
+                <section id="p-skills" class="port-section">
+                    <div class="p-header">
+                        <h1>Skills & Stuff I Actually Know</h1>
+                        <div class="p-accent-line"></div>
+                    </div>
+                    <div class="p-body">
+                        <p class="p-lead">Look, I'll keep this section relatively professional. Relatively.</p>
+
+                        <div class="cv-grid">
+                            <div class="cv-block">
+                                <h3><i class="fa-brands fa-react"></i> Frontend</h3>
+                                <p>React, JavaScript, TailwindCSS, Three.js, GSAP.</p>
+                                <span class="cv-note">I build things that look good, move smoothly, and don't make users
+                                    want to close the tab immediately. That's the goal at least.</span>
+                            </div>
+
+                            <div class="cv-block">
+                                <h3><i class="fa-solid fa-server"></i> Backend</h3>
+                                <p>Python, Django, Java, MySQL, PostgreSQL.</p>
+                                <span class="cv-note">The less glamorous side of the internet that nobody sees but
+                                    everything breaks without. I respect it.</span>
+                            </div>
+
+                            <div class="cv-block full-width">
+                                <h3><i class="fa-solid fa-robot"></i> AI Tools</h3>
+                                <p>I use them. Heavily.</p>
+                                <span class="cv-note">Look — I went through years of actually figuring things out the
+                                    hard way, and then AI showed up and made everything embarrassingly easy. Do I feel
+                                    slightly guilty? Sometimes. Am I stopping? Absolutely not. Google on the other hand
+                                    needs to calm down. 🤖</span>
+                            </div>
+
+                            <div class="cv-block full-width">
+                                <h3><i class="fa-solid fa-brain"></i> Soft Skills</h3>
+                                <p>Self-taught when curious, dangerously focused at 2am, works well alone (introvert,
+                                    see About Me), and somehow always figures it out eventually.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
         </div>
     </template>
 

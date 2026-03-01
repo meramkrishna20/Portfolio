@@ -1,0 +1,44 @@
+one is Hobbies another about another contact 
+
+and inside about section we should write something 
+like What brings you here? as the heading 
+and inside that there is contents like 
+
+Hi, I'm Bhisan Gaire — a Full Stack Web Developer and certified tech enthusiast who just survived a BCA degree at Patan Multiple Campus (Feb 2026, officially unleashed). Also a highly passionate video editor (half-baked, but the ambition is fully cooked). Currently "working on myself," which is a fancy way of saying I'm broke😂.
+I'm the kind of person who'll learn anything cool at 2am, go down rabbit holes the internet tried to hide, and somehow turn it into a side project nobody asked for. The stack is solid. The editing timeline? Chaotic. The bank account? Let's not talk about it.
+
+About me section 
+
+About Me
+I was born an introvert — and I mean that in the most clinical way possible. Crowds? No thanks. Small talk? I'd rather debug a 500-line error with no Stack Overflow. I could go an entire week without uttering a single word to another human and genuinely not notice. My longest, deepest, most intellectual conversations have always been with myself. I'm great company, apparently.
+School was... a experience. I never remember enjoying studying, but I had a very special talent — the ability to absorb an entire semester the night before the exam and walk out like nothing happened. A few hours of panic, a cup of something warm, and somehow it worked every time. Still does. Is it a bad habit? Yes. Am I fixing it? Absolutely not.
+I was born in Palpa, around 2003 — a peaceful beginning before life decided to keep relocating me. Class 1 through 5 in one place, then back to my hometown where I completed my SEE from Darlamdanda Secondary School (survived). Then Kathmandu happened. Joined Pentagon International College, Tinkune for Science in +2 (also survived), and eventually made it to Patan Multiple Campus where I completed my BCA in February 2026 (barely, but a pass is a pass).
+Somewhere between the late nights, the rabbit holes, the silent rooms, and the very questionable life choices — I found tech. And unlike group projects, deadlines, and social gatherings, it's something I actually want to show up for.
+
+hobbies section
+Some people have structured hobbies. I have impulses. 🤷‍♂️
+Like waking up one random morning and deciding today is the day I disappear into the hills somewhere — no plan, no crowd, just me, some trees, and the kind of silence that actually makes sense to me 🌿. No plans written down, no schedule, nothing. Just gone. Back eventually.
+Or waking up at 2am for absolutely no reason and ending up four hours deep into a YouTube rabbit hole about some obscure tech thing nobody in my contacts would care about 😂. Happens more than I'd like to admit. Zero regrets.
+I used to write songs. Still have the interest somewhere buried under deadlines and existential dread 🎵 — it's fading, but it's not dead yet. Music though? That's in the veins. School days I had earphones in all day, and now I've reached a point where I can hear a song in my head so vividly the entire environment just starts playing it for me. It's either a superpower or a symptom. Not sure which. 🎧
+Evenings? Calisthenics somewhere quiet and peaceful 💪. No gym, no audience, just movement.
+Food? I eat to survive. Genuinely 😭. I'll be mid-meal, stomach not even full, and already bored of the concept of eating. "How do I finish this faster" is a real thought I have. Regularly.
+And then there's tech — which is less of a hobby and more of a lifestyle disorder 💻. Video editing, digital art, gaming, Kali Linux, dark corners of the internet 🕳️, hacking concepts, custom Android setups, flipping between operating systems like most people change shirts — I've been everywhere. If it exists on a screen, I've probably poked at it. 👀
+Oh and — yes, that's Zoro everywhere on my portfolio. No, I'm not an anime freak. I've watched exactly one anime in my life — One Piece. All 1155 episodes. At a speed that would genuinely concern most people 🗡️. Zoro inspires me — the dedication, the grind, the absolute refusal to give up. The only thing I'm not taking from him is his sense of direction. That man gets lost going straight. 😭
+Currently my biggest dopamine hit is Blender — because apparently learning 3D modeling, sculpting, and rendering wasn't enough of a challenge, my brain decided yes, this is the one 🎨. My laptop sounds like it's filing a formal complaint every time I open it. The fan is screaming. The temperature is concerning. And I simply do not care — we are pushing through this together whether it likes it or not. 🔥💀
+
+cv 
+Skills & Things I Actually Know
+Look, I'll keep this section relatively professional. Relatively.
+Frontend
+React, JavaScript, TailwindCSS, Three.js, GSAP — I build things that look good, move smoothly, and don't make users want to close the tab immediately. That's the goal at least.
+Backend
+Python, Django, Java, MySQL, PostgreSQL — the less glamorous side of the internet that nobody sees but everything breaks without. I respect it.
+Currently Obsessing Over
+Blender, 3D stuff, and whatever rabbit hole opens up next week. Could be anything honestly.
+AI Tools
+I use them. Heavily. Look — I went through years of actually figuring things out the hard way, and then AI showed up and made everything embarrassingly easy. Do I feel slightly guilty? Sometimes. Am I stopping? Absolutely not. Google on the other hand needs to calm down, we had something special before AI took over and I'm still processing that. 🤖
+Soft Skills
+Self-taught when curious, dangerously focused at 2am, works well alone (introvert, see About Me), and somehow always figures it out eventually.
+
+"I don't know everything. But I know how to find it, break it, fix it, and pretend I knew all along."
+
