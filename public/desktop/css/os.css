@@ -374,6 +374,8 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
     min-width: 300px;
     min-height: 200px;
+    max-width: calc(100% - 40px);
+    max-height: calc(100% - 92px);
     overflow: hidden;
     animation: winSpawn 0.18s ease-out;
 }
@@ -394,6 +396,8 @@ body {
     inset: 0 !important;
     width: 100% !important;
     height: calc(100% - 52px) !important;
+    max-width: none !important;
+    max-height: none !important;
     border-radius: 0;
     transform: none !important;
     transition: all 0.15s;
@@ -489,15 +493,29 @@ body {
     border-right: 1px solid rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    padding: 36px 20px;
+    padding: 24px 20px;
     flex-shrink: 0;
     position: relative;
     z-index: 10;
+    overflow-y: auto;
+}
+
+.port-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.port-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.port-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .port-profile {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
 }
 
 .port-avatar {
@@ -583,7 +601,7 @@ body {
     font-style: italic;
     text-align: center;
     line-height: 1.5;
-    padding-top: 20px;
+    padding-top: 16px;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -835,14 +853,16 @@ body {
     background: #f5f5f7;
     border-radius: 16px;
     padding: 28px;
-    transition: all 0.3s;
-    border: 1px solid transparent;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
 }
 
 .cv-block:hover {
     background: #ffffff;
-    border-color: rgba(0, 113, 227, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 113, 227, 0.15);
+    box-shadow: 0 12px 32px rgba(0, 113, 227, 0.08);
+    transform: translateY(-4px);
 }
 
 .cv-block.full-width {
@@ -876,4 +896,116 @@ body {
     color: #86868b;
     line-height: 1.5;
     display: block;
+}
+
+/* ── Responsive Portfolio ── */
+@media (max-width: 850px) {
+    .app-portfolio {
+        flex-direction: column;
+    }
+    
+    .port-sidebar {
+        width: 100%;
+        padding: 16px 20px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    
+    .port-profile {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: left;
+    }
+    
+    .port-avatar {
+        width: 44px;
+        height: 44px;
+        margin: 0;
+        font-size: 20px;
+    }
+    
+    .port-profile h2 {
+        font-size: 1.2rem;
+    }
+
+    .port-profile p {
+        display: none;
+    }
+    
+    .port-nav {
+        flex-direction: row;
+        gap: 6px;
+        flex: 0;
+        overflow-x: auto;
+    }
+    
+    .p-nav-btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+    
+    .p-nav-btn i {
+        display: none;
+    }
+    
+    .port-quote {
+        display: none;
+    }
+    
+    .port-section {
+        padding: 30px 24px;
+    }
+    
+    .p-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .p-lead {
+        font-size: 1.15rem;
+    }
+    
+    .p-row {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .p-img-grid {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .p-col {
+        width: 100%;
+    }
+    
+    .p-img-placeholder.polaroid,
+    .p-img-placeholder.tall,
+    .p-img-placeholder.wide {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+    
+    .p-img-placeholder.polaroid {
+        padding-bottom: 50px;
+    }
+    
+    .p-img-placeholder.polaroid img.p-photo,
+    .p-img-placeholder.polaroid::before {
+        height: calc(100% - 70px);
+    }
+
+    .cv-grid {
+        gap: 16px;
+    }
+    .cv-block {
+        min-width: 100%;
+        padding: 24px;
+    }
 }

@@ -303,6 +303,8 @@ const OS = {
 
 window.addEventListener('DOMContentLoaded', () => {
     OS.init();
+    OS.openApp('cv');
+    OS.maximizeApp('cv');
 });
 
 // Inter-process Communication: Broadcast mouse movements to parent

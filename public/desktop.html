@@ -240,12 +240,15 @@
             <!-- Sidebar Navigation -->
             <nav class="port-sidebar">
                 <div class="port-profile">
-                    <div class="port-avatar"><i class="fa-solid fa-code"></i></div>
+                    <div class="port-avatar" style="overflow: hidden; padding: 0;">
+                        <img src="/desktop/images/download.png" alt="Avatar Placeholder"
+                            style="width: 100%; height: 100%; object-fit: cover;" />
+                    </div>
                     <h2>Bhisan</h2>
                     <p>Developer/Tech Enthusiast</p>
                 </div>
                 <nav class="port-nav">
-                    <button class="p-nav-btn active" data-target="p-home">
+                    <button class="p-nav-btn" data-target="p-home">
                         <i class="fa-solid fa-house"></i> Home
                     </button>
                     <button class="p-nav-btn" data-target="p-about">
@@ -254,8 +257,11 @@
                     <button class="p-nav-btn" data-target="p-hobbies">
                         <i class="fa-solid fa-gamepad"></i> Hobbies
                     </button>
-                    <button class="p-nav-btn" data-target="p-skills">
+                    <button class="p-nav-btn active" data-target="p-skills">
                         <i class="fa-solid fa-file-contract"></i> Skills & CV
+                    </button>
+                    <button class="p-nav-btn" data-target="p-projects">
+                        <i class="fa-solid fa-laptop-code"></i> Projects
                     </button>
                 </nav>
                 <div class="port-quote">
@@ -268,7 +274,7 @@
             <main class="port-content">
 
                 <!-- HOME SECTION -->
-                <section id="p-home" class="port-section active">
+                <section id="p-home" class="port-section">
                     <div class="p-header">
                         <h1>What brings you here?</h1>
                         <div class="p-accent-line"></div>
@@ -373,6 +379,16 @@
                                     can hear a song in my head so vividly the entire environment just starts playing it
                                     for me. Either a superpower or a symptom. 🎵
                                 </p>
+                            </div>
+                        </div>
+
+                        <div class="p-row">
+                            <div class="p-img-placeholder glass-frame"
+                                style="width: 160px; height: 160px; flex-shrink: 0; transform: rotate(2deg);">
+                                <img src="/desktop/images/blender.JPG" alt="Blender Project" class="p-photo" />
+                            </div>
+
+                            <div class="p-col">
                                 <p>
                                     <strong>The Blender Grind:</strong> Currently my biggest dopamine hit. My laptop
                                     sounds like it's filing a formal complaint. The fan is screaming. The temperature is
@@ -404,13 +420,13 @@
                 </section>
 
                 <!-- SKILLS / CV SECTION -->
-                <section id="p-skills" class="port-section">
+                <section id="p-skills" class="port-section active">
                     <div class="p-header">
                         <h1>Skills & Stuff I Actually Know</h1>
                         <div class="p-accent-line"></div>
                     </div>
                     <div class="p-body">
-                        <p class="p-lead">Look, I'll keep this section relatively professional. Relatively.</p>
+
 
                         <div class="cv-grid">
                             <div class="cv-block">
@@ -440,6 +456,125 @@
                                 <h3><i class="fa-solid fa-brain"></i> Soft Skills</h3>
                                 <p>Self-taught when curious, dangerously focused at 2am, works well alone (introvert,
                                     see About Me), and somehow always figures it out eventually.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROJECTS SECTION -->
+                <section id="p-projects" class="port-section">
+                    <div class="p-header">
+                        <h1>Featured Projects</h1>
+                        <div class="p-accent-line"></div>
+                    </div>
+                    <div class="p-body">
+                        <p class="p-lead" style="margin-bottom: 24px !important;">Live Websites</p>
+
+                        <div class="p-row" style="margin-bottom: 40px;">
+                            <!-- Live Project 1 -->
+                            <div class="p-col">
+                                <a href="https://koseli.shop" target="_blank"
+                                    class="p-img-placeholder wide glass-frame hover-lift"
+                                    style="text-decoration: none; padding: 0; position: relative; display: flex; flex-direction: column; overflow: hidden; height: 100%; border-radius: 20px; transition: all 0.3s ease;">
+                                    <div style="position: absolute; top: 16px; right: 16px; color: #fff; background: rgba(0, 0, 0, 0.5); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; font-size: 1rem; backdrop-filter: blur(4px);"
+                                        class="p-icon-link">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </div>
+                                    <div style="width: 100%; height: 65%; position: relative;">
+                                        <img src="/desktop/images/koselicam.JPG" alt="koseli.shop"
+                                            style="width: 100%; height: 100%; object-fit: cover; object-position: top center;" />
+                                    </div>
+                                    <div
+                                        style="padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; background: rgba(255,255,255,0.7);">
+                                        <h3
+                                            style="color: #1d1d1f; margin: 0 0 4px 0; font-size: 1.4rem; font-weight: 600;">
+                                            koseli.shop</h3>
+
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Live Project 2 -->
+                            <div class="p-col">
+                                <a href="https://hussboss.com" target="_blank"
+                                    class="p-img-placeholder wide glass-frame hover-lift"
+                                    style="text-decoration: none; padding: 0; position: relative; display: flex; flex-direction: column; overflow: hidden; height: 100%; border-radius: 20px; transition: all 0.3s ease;">
+                                    <div style="position: absolute; top: 16px; right: 16px; color: #fff; background: rgba(0, 0, 0, 0.5); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; font-size: 1rem; backdrop-filter: blur(4px);"
+                                        class="p-icon-link">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </div>
+                                    <div style="width: 100%; height: 65%; position: relative;">
+                                        <img src="/desktop/images/hussbosscam.JPG" alt="hussboss.com"
+                                            style="width: 100%; height: 100%; object-fit: cover; object-position: top center;" />
+                                    </div>
+                                    <div
+                                        style="padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; background: rgba(255,255,255,0.7);">
+                                        <h3
+                                            style="color: #1d1d1f; margin: 0 0 4px 0; font-size: 1.4rem; font-weight: 600;">
+                                            hussboss.com</h3>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <p class="p-lead" style="margin-bottom: 24px !important;">College & Academic Projects</p>
+
+                        <div class="p-row" style="margin-bottom: 40px;">
+                            <!-- College Project 1 -->
+                            <div class="p-col">
+                                <div class="p-img-placeholder wide glass-frame hover-lift"
+                                    style="padding: 32px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; border-radius: 20px; transition: all 0.3s ease;">
+                                    <i class="fa-brands fa-spotify"
+                                        style="font-size: 3.5rem; color: #1db954; margin-bottom: 20px; filter: drop-shadow(0 8px 16px rgba(29, 185, 84, 0.2));"></i>
+                                    <h3 style="color: #1d1d1f; margin: 0 0 8px 0; font-size: 1.5rem; font-weight: 600;">
+                                        ESangeet</h3>
+                                    <p style="color: #86868b; margin: 0; font-size: 1.05rem;">6th sem project. Music
+                                        recommendation system using Spotify API and custom algorithms.</p>
+                                </div>
+                            </div>
+
+                            <!-- College Project 2 -->
+                            <div class="p-col">
+                                <div class="p-img-placeholder wide glass-frame hover-lift"
+                                    style="padding: 32px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; border-radius: 20px; transition: all 0.3s ease;">
+                                    <i class="fa-solid fa-droplet"
+                                        style="font-size: 3.5rem; color: #e3001b; margin-bottom: 20px; filter: drop-shadow(0 8px 16px rgba(227, 0, 27, 0.2));"></i>
+                                    <h3 style="color: #1d1d1f; margin: 0 0 8px 0; font-size: 1.5rem; font-weight: 600;">
+                                        BDMS</h3>
+                                    <p style="color: #86868b; margin: 0; font-size: 1.05rem;">Blood Donation Management
+                                        routing requesters to the nearest registered donors utilizing distance-based
+                                        algorithms.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-row" style="margin-bottom: 40px;">
+                            <!-- College Project 3 -->
+                            <div class="p-col">
+                                <div class="p-img-placeholder wide glass-frame hover-lift"
+                                    style="padding: 32px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; border-radius: 20px; transition: all 0.3s ease;">
+                                    <i class="fa-solid fa-store"
+                                        style="font-size: 3.5rem; color: #0071e3; margin-bottom: 20px; filter: drop-shadow(0 8px 16px rgba(0, 113, 227, 0.2));"></i>
+                                    <h3 style="color: #1d1d1f; margin: 0 0 8px 0; font-size: 1.5rem; font-weight: 600;">
+                                        Shopmandu</h3>
+                                    <p style="color: #86868b; margin: 0; font-size: 1.05rem;">A fully functional
+                                        E-commerce site platform.</p>
+                                </div>
+                            </div>
+
+                            <!-- College Project 4 -->
+                            <div class="p-col">
+                                <div class="p-img-placeholder wide glass-frame hover-lift"
+                                    style="padding: 32px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; border-radius: 20px; transition: all 0.3s ease;">
+                                    <i class="fa-solid fa-newspaper"
+                                        style="font-size: 3.5rem; color: #0071e3; margin-bottom: 20px; filter: drop-shadow(0 8px 16px rgba(0, 113, 227, 0.2));"></i>
+                                    <h3 style="color: #1d1d1f; margin: 0 0 8px 0; font-size: 1.5rem; font-weight: 600;">
+                                        Kaha</h3>
+                                    <p style="color: #86868b; margin: 0; font-size: 1.05rem;">Final year project. News
+                                        recommendation system using 3 algorithms, keywords, and user preferences with a
+                                        free News API.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
