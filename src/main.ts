@@ -1,6 +1,10 @@
 import './style.css'
 import Experience from './Experience/Experience'
 import sources from './Experience/sources'
+import { inject } from '@vercel/analytics'
+
+// Inject Vercel Web Analytics
+inject()
 
 // ----- DOM REFS -----
 const introUi = document.getElementById('intro-ui')!
